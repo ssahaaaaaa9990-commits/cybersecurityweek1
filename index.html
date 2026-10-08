@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cybersecurity Month — Think Beyond the Control</title>
+
+<style>
+
+:root {
+    --bg: #05090d;
+    --surface: #0a1117;
+    --surface-2: #0e171e;
+    --surface-3: #111d25;
+
+    --text: #edf5f7;
+    --muted: #8799a3;
+
+    --cyan: #71d0e2;
+    --cyan-soft: rgba(113,208,226,.12);
+
+    --gold: #c8aa70;
+    --gold-soft: rgba(200,170,112,.14);
+
+    --green: #78d0a2;
+    --green-soft: rgba(120,208,162,.10);
+
+    --red: #df7d7d;
+    --red-soft: rgba(223,125,125,.10);
+
+    --border: rgba(185,210,220,.13);
+    --border-strong: rgba(185,210,220,.22);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(65,140,160,.10),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #05090d 0%,
+            #060b10 100%
+        );
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+/* --------------------------------------------------
+   BACKGROUND GRID
+-------------------------------------------------- */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(120,170,185,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(120,170,185,.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 52px 52px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.8),
+        transparent 85%
+    );
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* --------------------------------------------------
+   PAGE
+-------------------------------------------------- */
+
+.page {
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    padding: 52px 28px 80px;
+}
+
+/* --------------------------------------------------
+   HEADER
+-------------------------------------------------- */
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 48px;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.brand-eyebrow {
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    font-weight: 600;
+}
+
+.brand-title {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: .04em;
+}
+
+.week-label {
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+
+    padding-top: 3px;
+}
+
+/* --------------------------------------------------
+   HERO
+-------------------------------------------------- */
+
+.hero {
+    max-width: 820px;
+    margin-bottom: 46px;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: .98;
+    letter-spacing: -.055em;
+    font-weight: 650;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--muted);
+}
+
+.hero-copy {
+    max-width: 680px;
+
+    margin-top: 24px;
+
+    font-size: 16px;
+    line-height: 1.75;
+    color: #a9b8be;
+}
+
+/* --------------------------------------------------
+   PROGRESS
+-------------------------------------------------- */
+
+.progress-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.progress-track {
+    flex: 1;
+    height: 2px;
+
+    background: rgba(255,255,255,.08);
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 10%;
+
+    background: var(--cyan);
+
+    transition: width .4s ease;
+}
+
+.progress-count {
+    min-width: 55px;
+
+    text-align: right;
+
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: var(--muted);
+}
+
+/* --------------------------------------------------
+   QUIZ STAGE
+-------------------------------------------------- */
+
+.quiz-stage {
+    width: 100%;
+    perspective: 1600px;
+}
+
+/* Only ONE card exists in the stage */
+.quiz-card {
+    position: relative;
+
+    width: 100%;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .7s cubic-bezier(.2,.75,.25,1);
+
+    min-height: 660px;
+}
+
+.quiz-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+
+    backface-visibility: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,29,37,.98),
+            rgba(8,14,19,.99)
+        );
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 28px 90px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.025);
+
+    border-radius: 3px;
+
+    overflow: hidden;
+}
+
+.card-face::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            var(--gold),
+            transparent
+        );
+
+    opacity: .8;
+}
+
+/* --------------------------------------------------
+   CARD FRONT
+-------------------------------------------------- */
+
+.card-front {
+    padding: 38px 42px 42px;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 26px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+
+    color: var(--cyan);
+    font-weight: 600;
+}
+
+.category::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    background: var(--cyan);
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 14px rgba(113,208,226,.6);
+}
+
+.challenge-number {
+    font-size: 10px;
+    letter-spacing: .18em;
+    color: var(--muted);
+}
+
+/* --------------------------------------------------
+   SCENARIO
+-------------------------------------------------- */
+
+.scenario {
+    position: relative;
+
+    margin-top: 30px;
+    margin-bottom: 34px;
+
+    padding: 22px 24px 22px 26px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(113,208,226,.07),
+            rgba(113,208,226,.025)
+        );
+
+    border-left: 2px solid var(--cyan);
+
+    color: #b9c7cc;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.scenario-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+
+    color: var(--cyan);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------
+   QUESTION
+-------------------------------------------------- */
+
+.question-label {
+    margin-bottom: 11px;
+
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+
+    color: var(--gold);
+}
+
+.question {
+    margin: 0;
+
+    max-width: 780px;
+
+    font-size: clamp(27px, 3.2vw, 39px);
+    line-height: 1.14;
+
+    letter-spacing: -.025em;
+
+    font-weight: 620;
+}
+
+/* --------------------------------------------------
+   OPTIONS
+-------------------------------------------------- */
+
+.options {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 34px;
+}
+
+.option {
+    position: relative;
+
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 15px 18px;
+
+    background: rgba(255,255,255,.018);
+
+    border: 1px solid var(--border);
+
+    color: #dce6e9;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+
+    text-align: left;
+}
+
+.option:hover {
+    background: rgba(113,208,226,.055);
+
+    border-color:
+        rgba(113,208,226,.45);
+
+    transform: translateY(-2px);
+}
+
+.option-letter {
+    flex: 0 0 auto;
+
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    margin-right: 15px;
+
+    border: 1px solid var(--border-strong);
+
+    color: var(--cyan);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.option-text {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.option.selected {
+    border-color: var(--cyan);
+
+    background:
+        rgba(113,208,226,.10);
+}
+
+.option.correct {
+    border-color: var(--green);
+
+    background:
+        var(--green-soft);
+}
+
+.option.incorrect {
+    border-color: var(--red);
+
+    background:
+        var(--red-soft);
+}
+
+.option.disabled {
+    cursor: default;
+}
+
+/* --------------------------------------------------
+   CARD FOOTER
+-------------------------------------------------- */
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 30px;
+    padding-top: 22px;
+
+    border-top: 1px solid var(--border);
+}
+
+.footer-hint {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.footer-hint span {
+    color: #b7c6cb;
+}
+
+/* --------------------------------------------------
+   BACK FACE
+-------------------------------------------------- */
+
+.card-back {
+    transform: rotateY(180deg);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 44px;
+}
+
+.result-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    width: fit-content;
+
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.result-status::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+}
+
+.result-status.correct {
+    color: var(--green);
+}
+
+.result-status.correct::before {
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(120,208,162,.5);
+}
+
+.result-status.incorrect {
+    color: var(--red);
+}
+
+.result-status.incorrect::before {
+    background: var(--red);
+    box-shadow: 0 0 12px rgba(223,125,125,.5);
+}
+
+.result-title {
+    margin: 22px 0 30px;
+
+    font-size: clamp(32px, 4vw, 50px);
+    line-height: 1;
+
+    letter-spacing: -.04em;
+}
+
+.answer-summary {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 28px;
+}
+
+.answer-box {
+    padding: 18px;
+
+    background: rgba(255,255,255,.025);
+
+    border: 1px solid var(--border);
+}
+
+.answer-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+
+    color: var(--muted);
+}
+
+.answer-value {
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.explanation {
+    padding: 24px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(200,170,112,.08),
+            rgba(200,170,112,.025)
+        );
+
+    border-left: 2px solid var(--gold);
+
+    color: #c1cdd1;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.learning-point {
+    margin-top: 20px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.learning-point strong {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.back-footer {
+    margin-top: auto;
+    padding-top: 30px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.next-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 20px;
+
+    background: var(--cyan);
+
+    border: 0;
+
+    color: #061015;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: .12em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.next-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(113,208,226,.16);
+}
+
+.next-arrow {
+    font-size: 16px;
+}
+
+/* --------------------------------------------------
+   FINAL SCREEN
+-------------------------------------------------- */
+
+.final-screen {
+    display: none;
+
+    width: 100%;
+
+    min-height: 660px;
+
+    padding: 60px 42px;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,29,37,.98),
+            rgba(8,14,19,.99)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 3px;
+}
+
+.final-screen.visible {
+    display: flex;
+}
+
+.final-inner {
+    max-width: 650px;
+}
+
+.final-eyebrow {
+    color: var(--cyan);
+
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.final-score {
+    margin: 26px auto;
+
+    width: 150px;
+    height: 150px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid var(--border-strong);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(113,208,226,.08),
+            transparent 70%
+        );
+}
+
+.final-score strong {
+    font-size: 46px;
+    letter-spacing: -.05em;
+}
+
+.final-score span {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: .16em;
+}
+
+.final-title {
+    margin: 0;
+
+    font-size: 42px;
+    letter-spacing: -.04em;
+}
+
+.final-copy {
+    margin: 18px auto 30px;
+
+    max-width: 540px;
+
+    color: var(--muted);
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.score-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+
+    margin-bottom: 34px;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.score-item strong {
+    font-size: 20px;
+}
+
+.score-item span {
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.replay-button {
+    padding: 13px 22px;
+
+    background: transparent;
+
+    border: 1px solid var(--border-strong);
+
+    color: var(--text);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: .13em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.replay-button:hover {
+    background: rgba(255,255,255,.04);
+
+    border-color: var(--cyan);
+}
+
+/* --------------------------------------------------
+   RESPONSIVE
+-------------------------------------------------- */
+
+@media (max-width: 720px) {
+
+    .page {
+        padding: 32px 16px 60px;
+    }
+
+    .top-header {
+        margin-bottom: 36px;
+    }
+
+    .hero {
+        margin-bottom: 34px;
+    }
+
+    .hero h1 {
+        font-size: 44px;
+    }
+
+    .quiz-card {
+        min-height: 700px;
+    }
+
+    .card-front,
+    .card-back {
+        padding: 28px 22px;
+    }
+
+    .options {
+        grid-template-columns: 1fr;
+    }
+
+    .answer-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .card-footer {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .final-screen {
+        min-height: 700px;
+        padding: 40px 24px;
+    }
+
+    .final-title {
+        font-size: 34px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <header class="top-header">
+
+        <div class="brand">
+            <div class="brand-eyebrow">
+                Cybersecurity Month
+            </div>
+
+            <div class="brand-title">
+                Internal Security Challenge
+            </div>
+        </div>
+
+        <div class="week-label">
+            Week 01 — The System
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h1>
+            Think Beyond
+            <span>the Control.</span>
+        </h1>
+
+        <p class="hero-copy">
+            Security rarely fails because a single control does not exist.
+            The harder problems emerge when identities, permissions,
+            systems and controls interact.
+        </p>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+    <div class="progress-area">
+
+        <div class="progress-track">
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+        </div>
+
+        <div
+            class="progress-count"
+            id="progressCount">
+            01 / 10
+        </div>
+
+    </div>
+
+
+    <!-- QUIZ -->
+    <main>
+
+        <div
+            class="quiz-stage"
+            id="quizStage">
+        </div>
+
+
+        <!-- FINAL SCREEN -->
+        <section
+            class="final-screen"
+            id="finalScreen">
+
+            <div class="final-inner">
+
+                <div class="final-eyebrow">
+                    Challenge Complete
+                </div>
+
+                <div class="final-score">
+
+                    <strong id="finalScore">
+                        0/10
+                    </strong>
+
+                    <span>
+                        SCORE
+                    </span>
+
+                </div>
+
+                <h2
+                    class="final-title"
+                    id="finalTitle">
+                    You saw beyond the control.
+                </h2>
+
+                <p
+                    class="final-copy"
+                    id="finalCopy">
+                </p>
+
+                <div class="score-breakdown">
+
+                    <div class="score-item">
+
+                        <strong id="correctCount">
+                            0
+                        </strong>
+
+                        <span>
+                            Correct
+                        </span>
+
+                    </div>
+
+                    <div class="score-item">
+
+                        <strong id="incorrectCount">
+                            0
+                        </strong>
+
+                        <span>
+                            Incorrect
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="replay-button"
+                    id="replayButton">
+
+                    Replay Challenge
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   QUESTION DATA
+================================================== */
+
+const questions = [
+
+    {
+        category: "Identity & Access",
+
+        scenario:
+            "A new employee joins the finance team. Their account is automatically given access to several internal applications, including two systems they do not need for their role.",
+
+        question:
+            "What is the BEST security principle that should guide the access decision?",
+
+        options: [
+            "Single sign-on",
+            "Least privilege",
+            "Separation of duties",
+            "Mandatory access control"
+        ],
+
+        correct: 1,
+
+        explanation:
+            "Least privilege means an identity should receive only the permissions required to perform its legitimate responsibilities. Unnecessary access increases the potential impact if the account is compromised.",
+
+        principle:
+            "Security principle: Grant only the access required to perform the role."
+    },
+
+    {
+        category: "Identity & Access",
+
+        scenario:
+            "An employee successfully provides a username, password and MFA code. The system then checks whether that employee is allowed to view payroll information.",
+
+        question:
+            "What security function is being performed when the system makes this decision?",
+
+        options: [
+            "Identification",
+            "Authentication",
+            "Authorization",
+            "Accounting"
+        ],
+
+        correct: 2,
+
+        explanation:
+            "Authentication establishes that an identity has successfully proven who they are. Authorization determines what that authenticated identity is permitted to access or perform.",
+
+        principle:
+            "Security principle: Authentication answers 'Who are you?' Authorization answers 'What are you allowed to do?'"
+    },
+
+    {
+        category: "Access Governance",
+
+        scenario:
+            "One employee can create a large vendor payment, while another employee must independently approve it before the payment can be processed.",
+
+        question:
+            "Which principle is MOST directly being applied?",
+
+        options: [
+            "Single sign-on",
+            "Separation of duties",
+            "Mandatory access control",
+            "Password complexity"
+        ],
+
+        correct: 1,
+
+        explanation:
+            "Separation of duties divides sensitive responsibilities between different individuals or roles. This reduces the possibility that one person can complete a high-risk process without independent oversight.",
+
+        principle:
+            "Security principle: Critical actions should not depend on a single point of authority."
+    },
+
+    {
+        category: "Access Control",
+
+        scenario:
+            "A company gives every new employee access to all internal applications by default. Managers then remove access that employees do not need.",
+
+        question:
+            "Which access model would provide a stronger security baseline?",
+
+        options: [
+            "Allow everything, then remove access",
+            "Deny access by default, then grant what is required",
+            "Allow access based only on tenure",
+            "Give every employee the same role"
+        ],
+
+        correct: 1,
+
+        explanation:
+            "A deny-by-default approach starts with no access and grants only the permissions justified by business need. This reduces unnecessary exposure and makes access decisions more deliberate.",
+
+        principle:
+            "Security principle: Start restrictive and explicitly grant legitimate access."
+    },
+
+    {
+        category: "Identity & Access",
+
+        scenario:
+            "An employee uses six internal applications, each requiring a separate login. The security team wants to reduce password fatigue without removing authentication controls.",
+
+        question:
+            "Which capability BEST addresses this problem?",
+
+        options: [
+            "Reducing password complexity",
+            "Password reuse",
+            "Single sign-on",
+            "Removing authentication"
+        ],
+
+        correct: 2,
+
+        explanation:
+            "Single sign-on allows users to authenticate through a centralized identity mechanism and access multiple authorized applications without repeatedly managing separate credentials.",
+
+        principle:
+            "Security principle: Reduce credential friction without weakening identity assurance."
+    },
+
+    {
+        category: "Detection",
+
+        scenario:
+            "A security team deploys a server containing no legitimate business data. Any unexpected interaction with it generates an alert for investigation.",
+
+        question:
+            "What security mechanism BEST describes this setup?",
+
+        options: [
+            "Firewall",
+            "Honeypot",
+            "Proxy server",
+            "Vulnerability scanner"
+        ],
+
+        correct: 1,
+
+        explanation:
+            "A honeypot is a deliberately deployed system intended to attract or detect unauthorized activity. Since legitimate users should not normally interact with it, unexpected activity can be a useful detection signal.",
+
+        principle:
+            "Security principle: Create controlled environments where suspicious behaviour becomes visible."
+    },
+
+    {
+        category: "Network Security",
+
+        scenario:
+            "An attacker quietly captures network traffic but does not modify packets, disrupt communication or inject new information.",
+
+        question:
+            "How should this attack primarily be classified?",
+
+        options: [
+            "Active attack",
+            "Passive attack",
+            "Corrective control",
+            "Privilege escalation"
+        ],
+
+        correct: 1,
+
+        explanation:
+            "A passive attack attempts to obtain information without altering the communication or system being observed. Traffic interception and eavesdropping are examples.",
+
+        principle:
+            "Security principle: Not every attack changes data or systems; some attacks focus entirely on observation."
+    },
+
+    {
+        category: "Security Monitoring",
+
+        scenario:
+            "An intrusion detection system successfully identifies previously known malware patterns but fails to recognize a new attack technique that has no matching signature.",
+
+        question:
+            "What is the MOST relevant limitation demonstrated here?",
+
+        options: [
+            "Signature-based detection depends on known patterns",
+            "The system cannot monitor network activity",
+            "The control is a physical security mechanism",
+            "Signature detection prevents every zero-day attack"
+        ],
+
+        correct: 0,
+
+        explanation:
+            "Signature-based detection is effective when activity matches known patterns. A new technique without an existing signature may not be detected by that method alone.",
+
+        principle:
+            "Security principle: Detection capability is shaped by what the control already knows."
+    },
+
+    {
+        category: "Access Governance",
+
+        scenario:
+            "An employee changes roles several times over five years. Each move adds new permissions, but older permissions are rarely removed.",
+
+        question:
+            "What security problem is MOST likely developing?",
+
+        options: [
+            "Privilege creep",
+            "Federation",
+            "Nonrepudiation",
+            "Authentication failure"
+        ],
+
+        correct: 0,
+
+        explanation:
+            "Privilege creep occurs when users accumulate permissions over time as responsibilities change. Without periodic access review, historical permissions can remain long after they are needed.",
+
+        principle:
+            "Security principle: Access should reflect the current role, not the history of the identity."
+    },
+
+    {
+        category: "Security Architecture",
+
+        scenario:
+            "An organization has strong passwords, MFA, firewalls, endpoint controls and extensive logging. Each control appears effective individually, yet a combination of permissions and trust relationships creates an unintended access path.",
+
+        question:
+            "What should security teams examine MOST closely?",
+
+        options: [
+            "Whether every control uses the same technology",
+            "Whether adding more controls automatically eliminates risk",
+            "How controls, identities and permissions interact",
+            "Whether logging can replace preventive controls"
+        ],
+
+        correct: 2,
+
+        explanation:
+            "Security risk can emerge from the interaction between individually valid controls. Effective security requires understanding how identities, permissions, trust relationships and technical controls combine to produce actual capabilities.",
+
+        principle:
+            "Security principle: The security of the system depends on interactions, not just individual controls."
+    }
+
+];
+
+
+/* ==================================================
+   STATE
+================================================== */
+
+let currentQuestion = 0;
+let score = 0;
+
+/*
+    This array prevents a question from being scored
+    more than once.
+*/
+let answered = new Array(questions.length).fill(false);
+
+
+/* ==================================================
+   DOM
+================================================== */
+
+const quizStage =
+    document.getElementById("quizStage");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const progressCount =
+    document.getElementById("progressCount");
+
+const finalScore =
+    document.getElementById("finalScore");
+
+const finalTitle =
+    document.getElementById("finalTitle");
+
+const finalCopy =
+    document.getElementById("finalCopy");
+
+const correctCount =
+    document.getElementById("correctCount");
+
+const incorrectCount =
+    document.getElementById("incorrectCount");
+
+const replayButton =
+    document.getElementById("replayButton");
+
+
+/* ==================================================
+   BUILD CURRENT CARD
+================================================== */
+
+function buildQuestion(index) {
+
+    const q = questions[index];
+
+    quizStage.innerHTML = "";
+
+    const card = document.createElement("div");
+
+    card.className = "quiz-card";
+
+    card.innerHTML = `
+
+        <!-- FRONT -->
+
+        <section class="card-face card-front">
+
+            <div class="card-meta">
+
+                <div class="category">
+                    ${q.category}
+                </div>
+
+                <div class="challenge-number">
+                    CHALLENGE ${String(index + 1).padStart(2, "0")}
+                </div>
+
+            </div>
+
+
+            <div class="scenario">
+
+                <span class="scenario-label">
+                    Situation
+                </span>
+
+                ${q.scenario}
+
+            </div>
+
+
+            <div class="question-label">
+                Decision
+            </div>
+
+            <h2 class="question">
+                ${q.question}
+            </h2>
+
+
+            <div class="options">
+
+                ${q.options.map((option, i) => `
+
+                    <button
+                        class="option"
+                        data-index="${i}">
+
+                        <span class="option-letter">
+                            ${String.fromCharCode(65 + i)}
+                        </span>
+
+                        <span class="option-text">
+                            ${option}
+                        </span>
+
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+
+            <div class="card-footer">
+
+                <div class="footer-hint">
+                    Select the <span>BEST</span> answer.
+                </div>
+
+                <div class="footer-hint">
+                    Keyboard: <span>1–4</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BACK -->
+
+        <section class="card-face card-back">
+
+            <div
+                class="result-status"
+                id="resultStatus">
+            </div>
+
+            <h2
+                class="result-title"
+                id="resultTitle">
+            </h2>
+
+
+            <div class="answer-summary">
+
+                <div class="answer-box">
+
+                    <span class="answer-label">
+                        Your answer
+                    </span>
+
+                    <div
+                        class="answer-value"
+                        id="userAnswer">
+                    </div>
+
+                </div>
+
+
+                <div class="answer-box">
+
+                    <span class="answer-label">
+                        Correct answer
+                    </span>
+
+                    <div
+                        class="answer-value"
+                        id="correctAnswer">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="explanation"
+                id="explanation">
+            </div>
+
+
+            <div
+                class="learning-point"
+                id="learningPoint">
+            </div>
+
+
+            <div class="back-footer">
+
+                <button
+                    class="next-button"
+                    id="nextButton">
+
+                    ${
+                        index === questions.length - 1
+                        ? "View Final Score"
+                        : "Next Challenge"
+                    }
+
+                    <span class="next-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+    `;
+
+    quizStage.appendChild(card);
+
+    attachOptionEvents(card);
+
+    updateProgress();
+}
+
+
+/* ==================================================
+   ANSWER HANDLING
+================================================== */
+
+function handleAnswer(selectedIndex) {
+
+    /*
+        Safety check:
+        A question can only be answered once.
+    */
+
+    if (answered[currentQuestion]) {
+        return;
+    }
+
+    answered[currentQuestion] = true;
+
+    const q = questions[currentQuestion];
+
+    const options =
+        quizStage.querySelectorAll(".option");
+
+    options.forEach(option => {
+
+        option.classList.add("disabled");
+
+        option.disabled = true;
+
+    });
+
+
+    const selected =
+        options[selectedIndex];
+
+    const correct =
+        options[q.correct];
+
+
+    selected.classList.add("selected");
+
+
+    const isCorrect =
+        selectedIndex === q.correct;
+
+
+    if (isCorrect) {
+
+        score++;
+
+        selected.classList.add("correct");
+
+    } else {
+
+        selected.classList.add("incorrect");
+
+        correct.classList.add("correct");
+
+    }
+
+
+    /* Populate back side */
+
+    const status =
+        document.getElementById("resultStatus");
+
+    const title =
+        document.getElementById("resultTitle");
+
+    const userAnswer =
+        document.getElementById("userAnswer");
+
+    const correctAnswer =
+        document.getElementById("correctAnswer");
+
+    const explanation =
+        document.getElementById("explanation");
+
+    const learningPoint =
+        document.getElementById("learningPoint");
+
+
+    status.className =
+        "result-status " +
+        (isCorrect ? "correct" : "incorrect");
+
+    status.textContent =
+        isCorrect
+            ? "Correct"
+            : "Not quite";
+
+
+    title.textContent =
+        isCorrect
+            ? "Good security judgment."
+            : "Look beyond the obvious.";
+
+
+    userAnswer.textContent =
+        `${String.fromCharCode(65 + selectedIndex)}. ${q.options[selectedIndex]}`;
+
+
+    correctAnswer.textContent =
+        `${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}`;
+
+
+    explanation.textContent =
+        q.explanation;
+
+
+    learningPoint.innerHTML =
+        `<strong>Security principle:</strong> ${q.principle.replace("Security principle: ", "")}`;
+
+
+    /*
+        Flip only AFTER the selected state has
+        been visually applied.
+    */
+
+    requestAnimationFrame(() => {
+
+        const card =
+            quizStage.querySelector(".quiz-card");
+
+        card.classList.add("flipped");
+
+    });
+
+
+    updateProgress();
+}
+
+
+/* ==================================================
+   EVENTS
+================================================== */
+
+function attachOptionEvents(card) {
+
+    const options =
+        card.querySelectorAll(".option");
+
+
+    options.forEach(option => {
+
+        option.addEventListener("click", () => {
+
+            const index =
+                Number(option.dataset.index);
+
+            handleAnswer(index);
+
+        });
+
+    });
+
+
+    const nextButton =
+        card.querySelector("#nextButton");
+
+
+    nextButton.addEventListener("click", () => {
+
+        if (currentQuestion === questions.length - 1) {
+
+            showFinal();
+
+        } else {
+
+            currentQuestion++;
+
+            buildQuestion(currentQuestion);
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+    });
+
+}
+
+
+/* ==================================================
+   PROGRESS
+================================================== */
+
+function updateProgress() {
+
+    const completed =
+        answered.filter(Boolean).length;
+
+    const percentage =
+        (completed / questions.length) * 100;
+
+
+    progressFill.style.width =
+        `${percentage}%`;
+
+
+    if (completed === questions.length) {
+
+        progressCount.textContent =
+            "10 / 10";
+
+    } else {
+
+        progressCount.textContent =
+            `${String(currentQuestion + 1).padStart(2, "0")} / 10`;
+
+    }
+
+}
+
+
+/* ==================================================
+   FINAL SCORE
+================================================== */
+
+function showFinal() {
+
+    quizStage.style.display = "none";
+
+    finalScreen.classList.add("visible");
+
+
+    const total =
+        questions.length;
+
+    /*
+        score is incremented exactly once
+        inside handleAnswer() for every
+        correctly answered question.
+    */
+
+    const correct =
+        score;
+
+    const incorrect =
+        total - correct;
+
+    const percentage =
+        Math.round((correct / total) * 100);
+
+
+    finalScore.textContent =
+        `${correct}/${total}`;
+
+
+    correctCount.textContent =
+        correct;
+
+
+    incorrectCount.textContent =
+        incorrect;
+
+
+    if (percentage === 100) {
+
+        finalTitle.textContent =
+            "You saw beyond the control.";
+
+        finalCopy.textContent =
+            "Excellent. You recognised that effective security depends not only on individual controls, but on how identities, permissions and systems interact.";
+
+    }
+
+    else if (percentage >= 80) {
+
+        finalTitle.textContent =
+            "Strong security instincts.";
+
+        finalCopy.textContent =
+            "You identified most of the underlying security principles. The next step is to look more closely at what happens between individual controls.";
+
+    }
+
+    else if (percentage >= 60) {
+
+        finalTitle.textContent =
+            "Look closer.";
+
+        finalCopy.textContent =
+            "The fundamentals are there, but security problems often appear where permissions, identities and controls intersect.";
+
+    }
+
+    else {
+
+        finalTitle.textContent =
+            "The system has more to tell you.";
+
+        finalCopy.textContent =
+            "Security is rarely about one control in isolation. Look at the relationships between identities, permissions and systems.";
+
+    }
+
+}
+
+
+/* ==================================================
+   REPLAY
+================================================== */
+
+replayButton.addEventListener("click", () => {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    answered =
+        new Array(questions.length).fill(false);
+
+
+    finalScreen.classList.remove("visible");
+
+    quizStage.style.display = "block";
+
+
+    buildQuestion(0);
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+
+/* ==================================================
+   KEYBOARD SUPPORT
+================================================== */
+
+document.addEventListener("keydown", event => {
+
+    /*
+        Ignore keyboard shortcuts if final screen
+        is visible.
+    */
+
+    if (finalScreen.classList.contains("visible")) {
+        return;
+    }
+
+
+    const key =
+        event.key;
+
+
+    if (!["1", "2", "3", "4"].includes(key)) {
+        return;
+    }
+
+
+    if (answered[currentQuestion]) {
+        return;
+    }
+
+
+    const selectedIndex =
+        Number(key) - 1;
+
+
+    handleAnswer(selectedIndex);
+
+});
+
+
+/* ==================================================
+   INITIAL LOAD
+================================================== */
+
+buildQuestion(0);
+
+</script>
+
+</body>
+</html>
